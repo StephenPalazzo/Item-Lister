@@ -21,6 +21,7 @@ form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   var newItem = document.getElementById('item').value;
+  document.getElementById('item').value = '';
   var newRow = document.createElement('li');
   newRow.id = itemArray.length;
   newRow.className = 'list-group-item';
