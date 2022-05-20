@@ -1,14 +1,14 @@
-var form = document.getElementById('addForm');
-var itemList = document.getElementById('items');
-var search = document.getElementById('filter');
+const form = document.getElementById('addForm');
+const itemList = document.getElementById('items');
+const search = document.getElementById('filter');
 const itemArray = localStorage.getItem('listKey') == null ? [] : JSON.parse(localStorage.getItem('listKey'));
 
-for (var i = 0; i < itemArray.length; i++) {
-  var newRow = document.createElement('li');
+for (let i = 0; i < itemArray.length; i++) {
+  const newRow = document.createElement('li');
   newRow.id = i;
   newRow.className = 'list-group-item';
   
-  var deleteBtn = document.createElement('button');
+  const deleteBtn = document.createElement('button');
   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
   deleteBtn.appendChild(document.createTextNode('X'));
 
@@ -17,17 +17,17 @@ for (var i = 0; i < itemArray.length; i++) {
   itemList.appendChild(newRow);
 }
 
-form.addEventListener('submit', (e) => {
+form.addEventListener('submit', e => {
   e.preventDefault();
 
-  var newItem = document.getElementById('item').value;
+  const newItem = document.getElementById('item').value;
   document.getElementById('item').value = '';
-  var newRow = document.createElement('li');
+  const newRow = document.createElement('li');
   newRow.id = itemArray.length;
   newRow.className = 'list-group-item';
   itemArray.push(newItem);
 
-  var deleteBtn = document.createElement('button');
+  const deleteBtn = document.createElement('button');
   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
   deleteBtn.appendChild(document.createTextNode('X'));
 
@@ -38,13 +38,13 @@ form.addEventListener('submit', (e) => {
   localStorage.setItem('listKey', JSON.stringify(itemArray));
 });
 
-itemList.addEventListener('click', (e) => {
+itemList.addEventListener('click', e => {
   if(e.target.classList.contains('delete')) {
-    var deleteRow = e.target.parentElement;
+    const deleteRow = e.target.parentElement;
 
     itemArray.splice(deleteRow.id, 1);
 
-    for (var i = parseInt(deleteRow.id) + 1; i < itemList.children.length; i++) {
+    for (let i = parseInt(deleteRow.id) + 1; i < itemList.children.length; i++) {
       itemList.children[i].id -= 1; 
     }
 
@@ -54,13 +54,13 @@ itemList.addEventListener('click', (e) => {
   }
 });
 
-search.addEventListener('keyup', (e) => {
-  var searchText = e.target.value;
+search.addEventListener('keyup', e => {
+  const searchText = e.target.value;
 
-  var itemsCollection = itemList.getElementsByTagName('li');
+  const itemsCollection = itemList.getElementsByTagName('li');
 
   Array.from(itemsCollection).forEach(function(item) {
-    var itemText = item.firstChild.textContent;
+    const itemText = item.firstChild.textContent;
     if (itemText.toLowerCase().indexOf(searchText.toLowerCase()) == -1) {
       item.style.display = 'none';
     } else {
